@@ -31,5 +31,10 @@
             "src": "/(.*)",
             "dest": "/$1"
         }
-    ]
+    ],
+    "env": {
+        "DATABASE_URL": "postgresql://neondb_owner:npg_ELk4CqWteRd8@ep-aged-surf-as9gk1d4.c-4.eu-central-1.aws.neon.tech/neondb?sslmode=require",
+        "JWT_SECRET": "sou9hub_super_secret_key_2026",
+        "NODE_ENV": "production"
+    }
 }
