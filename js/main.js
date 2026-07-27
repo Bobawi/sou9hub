@@ -39,7 +39,7 @@ async function loadAds(containerId, params = {}) {
 
     try {
         const queryString = new URLSearchParams(params).toString();
-        const url = 'api/get-ads' + (queryString ? '?' + queryString : '');
+        const url = 'api/ads.js?action=get-ads' + (queryString ? '&' + queryString : '');
         const response = await fetch(url);
         const data = await response.json();
 
@@ -152,7 +152,7 @@ async function loadAdDetail() {
     }
 
     try {
-        var response = await fetch('api/get-ad?id=' + adId);
+        var response = await fetch('api/ads.js?action=get-ad&id=' + adId);
         var data = await response.json();
 
         if (data.success) {
@@ -226,7 +226,7 @@ function previewImage(event) {
 // =============== تأكيد حذف إعلان ===============
 function confirmDelete(adId) {
     if (confirm('هل أنت متأكد من حذف هذا الإعلان؟')) {
-        window.location.href = 'api/delete-ad?id=' + adId;
+        window.location.href = 'api/ads.js?action=delete-ad&id=' + adId;
     }
 }
 
@@ -241,7 +241,7 @@ async function handleLogin(event) {
     formData.forEach(function(value, key) { data[key] = value; });
     
     try {
-        var response = await fetch('api/login', {
+        var response = await fetch('api/auth.js?action=login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -272,7 +272,7 @@ async function handleRegister(event) {
     formData.forEach(function(value, key) { data[key] = value; });
     
     try {
-        var response = await fetch('api/register', {
+        var response = await fetch('api/auth.js?action=register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
@@ -314,7 +314,7 @@ async function handlePostAd(event) {
     submitBtn.textContent = '⏳ جاري النشر...';
     
     try {
-        var response = await fetch('api/post-ad', {
+        var response = await fetch('api/ads.js?action=post-ad', {
             method: 'POST',
             headers: getAuthHeaders(),
             body: JSON.stringify(data)
