@@ -1,0 +1,14 @@
+{
+    "name": "souqhub",
+    "version": "1.0.0",
+    "description": "سوق هب - منصة الإعلانات المبوبة المغربية",
+    "scripts": {
+        "dev": "vercel dev"
+    },
+    "dependencies": {
+        "pg": "^8.13.0",
+        "bcryptjs": "^2.4.3",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^1.4.5-lts.1"
+    }
+}

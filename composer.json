@@ -1,0 +1,8 @@
+{
+    "name": "souqhub/classifieds",
+    "description": "سوق هب - منصة الإعلانات المبوبة المغربية",
+    "type": "project",
+    "require": {
+        "php": ">=8.0"
+    }
+}

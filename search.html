@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البحث - سوقي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">🛒 سوقي</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="categories.html">الفئات</a></li>
+                    <li><a href="post-ad.html" class="btn-post">+ نشر إعلان</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">تسجيل الدخول</a>
+                <a href="register.html" class="btn-register">إنشاء حساب</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-section" style="padding:30px 0;">
+        <div class="container">
+            <div class="search-box">
+                <form action="search.html" method="GET">
+                    <input type="text" name="q" placeholder="ماذا تبحث عنه؟" value="" required>
+                    <select name="category" title="اختر الفئة">
+                        <option value="">جميع الفئات</option>
+                        <option value="cars">السيارات</option>
+                        <option value="real-estate">العقارات</option>
+                        <option value="electronics">الإلكترونيات</option>
+                        <option value="jobs">الوظائف</option>
+                        <option value="services">الخدمات</option>
+                        <option value="fashion">الموضة</option>
+                        <option value="kids">مستلزمات الأطفال</option>
+                        <option value="animals">الحيوانات</option>
+                    </select>
+                    <button type="submit"><i class="fas fa-search"></i> بحث</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="ads-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>نتائج البحث</h2>
+            </div>
+            <div class="ads-grid" id="search-results">
+                <div class="loading"><i class="fas fa-spinner fa-spin"></i> جاري البحث...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- إعلان AdSense بين النتائج -->
+    <div class="adsense-banner">
+        <div class="container">
+            <div class="ad-placeholder">
+                <p>📢 إعلان - AdSense</p>
+                <div class="ad-code">ضع كود الإعلان هنا</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>🛒 سوقي</h3>
+                    <p>أول سوق مغربي للإعلانات المبوبة.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="post-ad.html">نشر إعلان</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 سوقي - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

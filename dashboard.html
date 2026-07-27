@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - سوقي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">🛒 سوقي</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="categories.html">الفئات</a></li>
+                    <li><a href="post-ad.html" class="btn-post">+ نشر إعلان</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="dashboard-auth-buttons">
+                <a href="#" class="btn-login" onclick="handleLogout(event)">تسجيل الخروج</a>
+                <a href="dashboard.html" class="btn-register">لوحة التحكم</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+    </header>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>👋 مرحباً بك في لوحة التحكم</h2>
+                <div>
+                    <span id="user-name" style="margin-left:15px;font-weight:600;"></span>
+                    <a href="post-ad.html" class="btn btn-primary">+ نشر إعلان جديد</a>
+                </div>
+
+            <div class="dashboard-stats" id="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-ad"></i>
+                    <h3>إجمالي الإعلانات</h3>
+                    <div class="stat-number" id="total-ads">0</div>
+                <div class="stat-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>إجمالي المشاهدات</h3>
+                    <div class="stat-number" id="total-views">0</div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3>الإعلانات المميزة</h3>
+                    <div class="stat-number" id="featured-ads-count">0</div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>آخر نشاط</h3>
+                    <div class="stat-number" id="last-activity">-</div>
+            </div>
+
+            <h3 style="margin-bottom:20px;">📋 إعلاناتي</h3>
+            <div class="ads-grid" id="my-ads">
+                <div class="loading"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>🛒 سوقي</h3>
+                    <p>أول سوق مغربي للإعلانات المبوبة.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="post-ad.html">نشر إعلان</a></li>
+                    </ul>
+                </div>
+            <div class="footer-bottom">
+                <p>© 2026 سوقي - جميع الحقوق محفوظة</p>
+            </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // التحقق من تسجيل الدخول
+        async function loadDashboard() {
+            const token = getToken();
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('api/get-user', {
+                    headers: getAuthHeaders()
+                });
+                const data = await response.json();
+                
+                if (!data.success) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                document.getElementById('user-name').textContent = '👋 ' + data.user.username;
+                
+                // تحميل إحصائيات المستخدم
+                const statsResponse = await fetch('api/user-stats', {
+                    headers: getAuthHeaders()
+                });
+                const statsData = await statsResponse.json();
+                
+                if (statsData.success) {
+                    document.getElementById('total-ads').textContent = statsData.total_ads;
+                    document.getElementById('total-views').textContent = statsData.total_views;
+                    document.getElementById('featured-ads-count').textContent = statsData.featured_ads;
+                    document.getElementById('last-activity').textContent = statsData.last_activity;
+                }
+                
+                // تحميل إعلانات المستخدم
+                const adsResponse = await fetch('api/my-ads', {
+                    headers: getAuthHeaders()
+                });
+                const adsData = await adsResponse.json();
+                const myAdsContainer = document.getElementById('my-ads');
+                
+                if (adsData.success && adsData.ads.length > 0) {
+                    let html = '';
+                    adsData.ads.forEach(ad => {
+                        html += createAdCard(ad);
+                        html += `
+                        <div style="text-align:center;margin-top:-10px;margin-bottom:20px;">
+                            <a href="api/delete-ad?id=${ad.id}" class="btn btn-danger btn-sm" onclick="return confirm('هل أنت متأكد من حذف هذا الإعلان؟')">
+                                <i class="fas fa-trash"></i> حذف
+                            </a>
+                            ${!ad.is_featured ? `<a href="api/feature-ad?id=${ad.id}" class="btn btn-primary btn-sm" style="margin-right:10px;">
+                                <i class="fas fa-star"></i> تمييز
+                            </a>` : ''}
+                        </div>`;
+                    });
+                    myAdsContainer.innerHTML = html;
+                } else {
+                    myAdsContainer.innerHTML = `
+                        <div class="loading" style="grid-column:1/-1;">
+                            <i class="fas fa-box-open"></i>
+                            <p>لا توجد إعلانات بعد</p>
+                            <a href="post-ad.html" class="btn btn-primary" style="margin-top:15px;">نشر أول إعلان</a>
+                        </div>`;
+                }
+            } catch (error) {
+                console.error('Dashboard error:', error);
+                window.location.href = 'login.html';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadDashboard);
+    </script>
+</body>
+</html>

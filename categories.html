@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الفئات - سوقي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">🛒 سوقي</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="categories.html">الفئات</a></li>
+                    <li><a href="post-ad.html" class="btn-post">+ نشر إعلان</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">تسجيل الدخول</a>
+                <a href="register.html" class="btn-register">إنشاء حساب</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="categories-section" style="min-height:60vh;">
+        <div class="container">
+            <h2>جميع الفئات</h2>
+            <p style="text-align:center;margin-bottom:30px;color:#888;">اختر الفئة التي تريد البحث فيها</p>
+            <div class="categories-grid">
+                <a href="search.html?category=cars" class="category-card">
+                    <i class="fas fa-car"></i>
+                    <span>السيارات</span>
+                </a>
+                <a href="search.html?category=real-estate" class="category-card">
+                    <i class="fas fa-home"></i>
+                    <span>العقارات</span>
+                </a>
+                <a href="search.html?category=electronics" class="category-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>الإلكترونيات</span>
+                </a>
+                <a href="search.html?category=jobs" class="category-card">
+                    <i class="fas fa-briefcase"></i>
+                    <span>الوظائف</span>
+                </a>
+                <a href="search.html?category=services" class="category-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>الخدمات</span>
+                </a>
+                <a href="search.html?category=fashion" class="category-card">
+                    <i class="fas fa-tshirt"></i>
+                    <span>الموضة</span>
+                </a>
+                <a href="search.html?category=kids" class="category-card">
+                    <i class="fas fa-baby"></i>
+                    <span>مستلزمات الأطفال</span>
+                </a>
+                <a href="search.html?category=animals" class="category-card">
+                    <i class="fas fa-paw"></i>
+                    <span>الحيوانات</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- إعلان AdSense -->
+    <div class="adsense-banner">
+        <div class="container">
+            <div class="ad-placeholder">
+                <p>📢 إعلان - AdSense</p>
+                <div class="ad-code">ضع كود الإعلان هنا</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>🛒 سوقي</h3>
+                    <p>أول سوق مغربي للإعلانات المبوبة.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="post-ad.html">نشر إعلان</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 سوقي - جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
+

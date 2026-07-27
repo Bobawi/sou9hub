@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق هب - أول سوق مغربي للإعلانات المبوبة | SouqHub</title>
+    <meta name="description" content="سوق هب - منصة الإعلانات المبوبة الأولى في المغرب. سيارات، عقارات، إلكترونيات، وظائف وخدمات. بيع واشتري بسهولة وأمان.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* أنماط إضافية - فوق هاد اللي فـ style.css */
+        .hero {
+            background: linear-gradient(135deg, #1d3557 0%, #0f1a2e 50%, #1d3557 100%);
+            padding: 90px 20px 110px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230,57,70,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.15); opacity: 0.9; }
+        }
+
+        .hero-content { max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .hero h1 { font-size: 44px; font-weight: 900; color: white; margin-bottom: 14px; }
+        .hero h1 span { background: linear-gradient(135deg, #ff6b6b, #ffd93d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.75); margin-bottom: 36px; }
+
+        .ad-placeholder {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 2px dashed #ced4da;
+            color: #6c757d;
+        }
+
+        .ad-placeholder:hover { border-color: #e63946; }
+        .ad-placeholder i { font-size: 28px; margin-bottom: 8px; display: block; color: #e63946; }
+        .ad-placeholder small { color: #adb5bd; }
+        .ad-section { max-width: 1280px; margin: 30px auto; padding: 0 20px; }
+
+        .listing-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #e63946, #c1121f);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            z-index: 2;
+        }
+
+        .listing-fav {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 34px;
+            height: 34px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .listing-fav.active { color: #e63946; }
+        .listing-fav.active i.far { display: none; }
+        .listing-fav:not(.active) i.fas { display: none; }
+        .listing-fav.active i.fas { display: inline; }
+        .listing-fav:not(.active) i.far { display: inline; }
+
+        .stats-bar { background: linear-gradient(135deg, #1d3557, #0f1a2e); padding: 40px 20px; margin: 20px 0; }
+        .stats-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item h3 { font-size: 36px; font-weight: 900; color: #ff6b6b; margin-bottom: 6px; }
+        .stat-item p { color: rgba(255,255,255,0.7); font-size: 15px; font-weight: 600; }
+
+        .how-it-works { background: white; padding: 60px 20px; margin-top: 30px; }
+        .how-grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; }
+        .how-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #e63946, #c1121f); color: white; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 20px; }
+
+        .cta-section { background: linear-gradient(135deg, #e63946, #c1121f); padding: 70px 20px; text-align: center; }
+        .cta-section h2 { font-size: 36px; font-weight: 900; color: white; margin-bottom: 14px; }
+        .cta-section p { font-size: 18px; color: rgba(255,255,255,0.85); margin-bottom: 30px; }
+        .cta-btn { background: white; color: #e63946; border: none; padding: 16px 40px; border-radius: 12px; font-size: 17px; font-weight: 800; cursor: pointer; transition: all 0.3s; }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #1d3557;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(120px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 9999;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 26px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .how-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">🛒 سوق هب</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="categories.html"><i class="fas fa-th-large"></i> الفئات</a></li>
+                    <li><a href="post-ad.html" class="btn-post"><i class="fas fa-plus-circle"></i> نشر إعلان</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="register.html" class="btn-register">إنشاء حساب</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ابحث عن ما تريد في <span>المغرب</span></h1>
+            <p>آلاف الإعلانات المبوبة بين يديك - سيارات، عقارات، إلكترونيات و أكثر</p>
+            <div class="search-box">
+                <form action="search.html" method="GET">
+                    <input type="text" name="q" placeholder="ماذا تبحث عنه؟" required>
+                    <select name="category" title="اختر الفئة">
+                        <option value="">جميع الفئات</option>
+                        <option value="cars">السيارات</option>
+                        <option value="real-estate">العقارات</option>
+                        <option value="electronics">الإلكترونيات</option>
+                        <option value="jobs">الوظائف</option>
+                        <option value="services">الخدمات</option>
+                        <option value="fashion">الموضة</option>
+                        <option value="kids">مستلزمات الأطفال</option>
+                        <option value="animals">الحيوانات</option>
+                    </select>
+                    <button type="submit"><i class="fas fa-search"></i> بحث</button>
+                </form>
+            </div>
+    </section>
+
+    <!-- AdSense Banner 1 -->
+    <div class="ad-section">
+        <div class="ad-placeholder">
+            <i class="fas fa-ad"></i>
+            <p>📢 إعلان - Google AdSense</p>
+            <!-- ضع كود AdSense هنا -->
+            <small>ضع كود الإعلان هنا لتحقيق الدخل</small>
+        </div>
+
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>تصفح حسب الفئة</h2>
+                <p>اختر الفئة التي تهمك وابحث بسهولة</p>
+            </div>
+            <div class="categories-grid">
+                <a href="search.html?category=cars" class="category-card">
+                    <i class="fas fa-car"></i>
+                    <span>السيارات</span>
+                </a>
+                <a href="search.html?category=real-estate" class="category-card">
+                    <i class="fas fa-home"></i>
+                    <span>العقارات</span>
+                </a>
+                <a href="search.html?category=electronics" class="category-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>الإلكترونيات</span>
+                </a>
+                <a href="search.html?category=jobs" class="category-card">
+                    <i class="fas fa-briefcase"></i>
+                    <span>الوظائف</span>
+                </a>
+                <a href="search.html?category=services" class="category-card">
+                    <i class="fas fa-concierge-bell"></i>
+                    <span>الخدمات</span>
+                </a>
+                <a href="search.html?category=fashion" class="category-card">
+                    <i class="fas fa-tshirt"></i>
+                    <span>الموضة</span>
+                </a>
+                <a href="search.html?category=kids" class="category-card">
+                    <i class="fas fa-baby"></i>
+                    <span>مستلزمات الأطفال</span>
+                </a>
+                <a href="search.html?category=animals" class="category-card">
+                    <i class="fas fa-paw"></i>
+                    <span>الحيوانات</span>
+                </a>
+            </div>
+    </section>
+
+    <!-- إعلان AdSense 2 -->
+    <div class="ad-section">
+        <div class="ad-placeholder">
+            <i class="fas fa-ad"></i>
+            <p>📢 إعلان - Google AdSense</p>
+            <!-- ضع كود AdSense هنا -->
+            <small>ضع كود الإعلان هنا لتحقيق الدخل</small>
+        </div>
+
+    <section class="ads-section" id="listings">
+        <div class="container">
+            <div class="section-header">
+                <h2>آخر الإعلانات</h2>
+                <a href="search.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="ads-grid" id="latest-ads">
+                <div class="loading"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
+        </div>
+    </section>
+
+    <!-- AdSense 3 -->
+    <div class="ad-section">
+        <div class="ad-placeholder">
+            <i class="fas fa-ad"></i>
+            <p>📢 إعلان - Google AdSense</p>
+            <!-- ضع كود AdSense هنا -->
+            <small>ضع كود الإعلان هنا لتحقيق الدخل</small>
+        </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3 id="statListings">7,419</h3>
+                <p>إعلان نشط</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="statUsers">15,230</h3>
+                <p>مستخدم مسجل</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="statCities">45</h3>
+                <p>مدينة مغربية</p>
+            </div>
+            <div class="stat-item">
+                <h3 id="statDaily">+500</h3>
+                <p>إعلان يومياً</p>
+            </div>
+    </div>
+
+    <section class="featured-section" id="featured">
+        <div class="container">
+            <h2>إعلانات مميزة ⭐</h2>
+            <div class="ads-grid" id="featured-ads">
+                <div class="loading"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>كيف يعمل سوق هب؟</h2>
+                <p>ثلاث خطوات بسيطة للبيع والشراء</p>
+            </div>
+            <div class="how-grid">
+                <div class="how-item">
+                    <div class="how-icon"><i class="fas fa-search"></i></div>
+                    <h3>ابحث</h3>
+                    <p>استخدم محرك البحث أو تصفح الفئات للعثور على ما تبحث عنه</p>
+                </div>
+                <div class="how-item">
+                    <div class="how-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>تواصل</h3>
+                    <p>تواصل مباشرة مع البائع عبر الهاتف أو الواتساب</p>
+                </div>
+                <div class="how-item">
+                    <div class="how-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>تبادل</h3>
+                    <p>قابل البائع في مكان عام واتمم الصفقة بأمان</p>
+                </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>عندك شي حاجة للبيع؟</h2>
+            <p>انشر إعلانك الآن ووصل لآلاف المشترين في جميع أنحاء المغرب - مجاناً!</p>
+            <a href="post-ad.html" class="cta-btn"><i class="fas fa-plus-circle"></i> أنشر إعلانك الآن</a>
+        </div>
+    </section>
+
+    <!-- AdSense 4 -->
+    <div class="ad-section">
+        <div class="ad-placeholder">
+            <i class="fas fa-ad"></i>
+            <p>📢 إعلان - Google AdSense</p>
+            <!-- ضع كود AdSense هنا -->
+            <small>ضع كود الإعلان هنا لتحقيق الدخل</small>
+        </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>🛒 سوق هب</h3>
+                    <p>أول سوق مغربي للإعلانات المبوبة. منصة آمنة وسهلة الاستخدام.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="categories.html">الفئات</a></li>
+                        <li><a href="post-ad.html">نشر إعلان</a></li>
+                        <li><a href="about.html">عن الموقع</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="search.html?category=cars">السيارات</a></li>
+                        <li><a href="search.html?category=real-estate">العقارات</a></li>
+                        <li><a href="search.html?category=electronics">الإلكترونيات</a></li>
+                        <li><a href="search.html?category=jobs">الوظائف</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>الدعم</h3>
+                    <ul>
+                        <li><a href="#">مركز المساعدة</a></li>
+                        <li><a href="#">شروط الاستخدام</a></li>
+                        <li><a href="#">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>تواصل معنا</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-envelope"></i> contact@souqhub.ma</a></li>
+                        <li><a href="#"><i class="fab fa-whatsapp"></i> +212 6XX-XXXXXX</a></li>
+                    </ul>
+                </div>
+            <div class="footer-bottom">
+                <p>© 2026 سوق هب - جميع الحقوق محفوظة | منصة الإعلانات المبوبة الأولى في المغرب</p>
+            </div>
+    </footer>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">تمت العملية بنجاح</span>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Demo data for homepage (when API is not available)
+        const demoListings = [
+            { id: 1, title: "آيفون 15 برو ماكس 256GB - جديد مع ضمان", price: "12,500 درهم", image: "https://images.unsplash.com/photo-1696446701796-da61225697cc?w=400&h=300&fit=crop", location: "الدار البيضاء", created_at: new Date(), category: "electronics", is_featured: false },
+            { id: 2, title: "شقة فاخرة 3 غرف - حي المعاريف", price: "8,500 درهم/شهر", image: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop", location: "الرباط", created_at: new Date(), category: "real-estate", is_featured: true },
+            { id: 3, title: "رينو كليو 4 - 2018 - 80,000 كم", price: "95,000 درهم", image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop", location: "مراكش", created_at: new Date(), category: "cars", is_featured: false },
+            { id: 4, title: "ماك بوك برو M2 - 512GB SSD", price: "15,000 درهم", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop", location: "طنجة", created_at: new Date(), category: "electronics", is_featured: true },
+            { id: 5, title: "فيلا مع مسبح خاص - 400 م²", price: "3,500,000 درهم", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=400&h=300&fit=crop", location: "أغادير", created_at: new Date(), category: "real-estate", is_featured: false },
+            { id: 6, title: "سامسونج S24 ألترا - 512GB", price: "10,800 درهم", image: "https://images.unsplash.com/photo-1610945265078-3858a0b5d8f4?w=400&h=300&fit=crop", location: "فاس", created_at: new Date(), category: "electronics", is_featured: false },
+            { id: 7, title: "بيجو 3008 - 2020 - ديزل", price: "185,000 درهم", image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=300&fit=crop", location: "الدار البيضاء", created_at: new Date(), category: "cars", is_featured: true },
+            { id: 8, title: "محل تجاري للكراء - وسط المدينة", price: "5,000 درهم/شهر", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop", location: "الرباط", created_at: new Date(), category: "real-estate", is_featured: false }
+        ];
+
+        function renderDemoAds() {
+            const latestContainer = document.getElementById('latest-ads');
+            const featuredContainer = document.getElementById('featured-ads');
+            const featured = demoListings.filter(a => a.is_featured);
+            
+            if (latestContainer) {
+                latestContainer.innerHTML = demoListings.map(ad => createAdCard(ad)).join('');
+            }
+            if (featuredContainer) {
+                featuredContainer.innerHTML = featured.length > 0 
+                    ? featured.map(ad => createAdCard(ad)).join('')
+                    : '<div class="loading">لا توجد إعلانات مميزة حالياً</div>';
+            }
+        }
+
+        function createAdCard(ad) {
+            const imageHtml = ad.image 
+                ? `<img src="${ad.image}" alt="${ad.title}" loading="lazy">`
+                : `<div class="no-image"><i class="fas fa-image"></i></div>`;
+            const featuredBadge = ad.is_featured ? `<span class="listing-badge">مميز ⭐</span>` : '';
+            return `
+                <a href="ad-detail.html?id=${ad.id}" class="ad-card ${ad.is_featured ? 'featured' : ''}">
+                    ${featuredBadge}
+                    <div class="ad-image">${imageHtml}</div>
+                    <div class="ad-body">
+                        <div class="ad-title">${ad.title}</div>
+                        <div class="ad-price">${ad.price}</div>
+                        <div class="ad-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${ad.location || 'المغرب'}</span>
+                            <span><i class="far fa-clock"></i> منذ لحظات</span>
+                        </div>
+                </a>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', renderDemoAds);
+    </script>
+</body>
+</html>

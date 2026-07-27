@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: souqhub
+    env: php
+    buildCommand: 'composer install --no-dev --optimize-autoloader'
+    startCommand: 'apache2-foreground'
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: souqhub-db
+          property: connectionString
+    staticPublishPath: ./
+
+databases:
+  - name: souqhub-db
+    databaseName: souqhub
+    plan: free

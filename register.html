@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - سوقي</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html">🛒 سوقي</a></h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="categories.html">الفئات</a></li>
+                    <li><a href="post-ad.html" class="btn-post">+ نشر إعلان</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn-login">تسجيل الدخول</a>
+                <a href="register.html" class="btn-register">إنشاء حساب</a>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-box">
+                <h2>📝 إنشاء حساب جديد</h2>
+                <div id="register-message"></div>
+                <form id="register-form" onsubmit="return handleRegister(event)">
+                    <div class="form-group">
+                        <label for="username">الاسم الكامل</label>
+                        <input type="text" id="username" name="username" placeholder="أدخل اسمك الكامل" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">المدينة</label>
+                        <input type="text" id="city" name="city" placeholder="أدخل مدينتك">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة السر</label>
+                        <input type="password" id="password" name="password" placeholder="أدخل كلمة السر (6 أحرف على الأقل)" minlength="6" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">إنشاء الحساب</button>
+                </form>
+                <div class="auth-link">
+                    لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a>
+                </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>🛒 سوقي</h3>
+                    <p>أول سوق مغربي للإعلانات المبوبة.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="login.html">تسجيل الدخول</a></li>
+                    </ul>
+                </div>
+            <div class="footer-bottom">
+                <p>© 2026 سوقي - جميع الحقوق محفوظة</p>
+            </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
